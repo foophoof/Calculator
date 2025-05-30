@@ -245,6 +245,8 @@ public class AddonCalculator(NativeController nativeController) : NativeAddon {
             Title = "Test",
         };
         nativeController.AttachToAddon(this.vistaNode, this);
+
+        return;
         
         var xPos = FramePadding;
         var yPos = Size.Y - UnitSize - FramePadding;
