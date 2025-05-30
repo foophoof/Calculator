@@ -43,17 +43,17 @@ public class NativeUiService(IDalamudPluginInterface pluginInterface, IPluginLog
         
         // Native Controller is required for injecting KamiToolKit elements into the native UI
         // It provides tracking and safety features that ensure the stability of the game when manipulating native elements
-        nativeController = new NativeController(pluginInterface);
-
-        // Construct instance of AddonController, with desired parameters
-        addonCalculator = new AddonCalculator(nativeController) {
-            InternalName = "Calculator",
-            Title = "Calculator",
-            Size = new Vector2(305.0f, 415.0f),
-        };
+        // nativeController = new NativeController(pluginInterface);
+        //
+        // // Construct instance of AddonController, with desired parameters
+        // addonCalculator = new AddonCalculator(nativeController) {
+        //     InternalName = "Calculator",
+        //     Title = "Calculator",
+        //     Size = new Vector2(305.0f, 415.0f),
+        // };
         
         // For this demo, we will open the calculator window as soon as the plugin loads
-        OpenCalculator();
+        // OpenCalculator();
 
         pluginInterface.UiBuilder.OpenMainUi += OpenCalculator;
     }
@@ -82,6 +82,15 @@ public class NativeUiService(IDalamudPluginInterface pluginInterface, IPluginLog
 
     // Opens the calculator window, it is not safe to call this from any thread except the main thread
     internal void OpenCalculator() {
+        var internalName = $"Calculator{DateTime.Now.Subtract(new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds}";
+        
+        this.nativeController ??= new NativeController(pluginInterface);
+        this.addonCalculator ??= new AddonCalculator(nativeController) {
+            InternalName = internalName,
+            Title = "Calculator",
+            Size = new Vector2(305.0f, 415.0f),
+        };
+        
         if (this.nativeController is null) return;
         this.addonCalculator?.Open(this.nativeController);
     }
@@ -241,7 +250,7 @@ public class AddonCalculator(NativeController nativeController) : NativeAddon {
         vistaNode = new VistaNode(nativeController) {
             Position = new Vector2(FramePadding, FramePadding + addon->WindowHeaderCollisionNode->Height),
             IsVisible = true,
-            Number = "002",
+            Number = "001",
             Title = "Test",
         };
         nativeController.AttachToAddon(this.vistaNode, this);
