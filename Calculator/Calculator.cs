@@ -241,248 +241,248 @@ public class AddonCalculator(NativeController nativeController) : NativeAddon {
         vistaNode = new VistaNode(nativeController) {
             Position = new Vector2(FramePadding, FramePadding + addon->WindowHeaderCollisionNode->Height),
             IsVisible = true,
-            Number = "001",
+            Number = "002",
             Title = "Test",
         };
         nativeController.AttachToAddon(this.vistaNode, this);
+        
+        var xPos = FramePadding;
+        var yPos = Size.Y - UnitSize - FramePadding;
+        
+        // Create custom node
+        number0 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos), 
+            Size = new Vector2(UnitSize * 2.0f + UnitPadding, UnitSize), 
+            IsVisible = true, 
+            Label = "zero",
+        };
+        
+        number0.AddEvent(AddonEventType.ButtonClick, () => EditNumber(0));
+        
+        // Attach custom node to addon
         //
-        // var xPos = FramePadding;
-        // var yPos = Size.Y - UnitSize - FramePadding;
-        //
-        // // Create custom node
-        // number0 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos), 
-        //     Size = new Vector2(UnitSize * 2.0f + UnitPadding, UnitSize), 
-        //     IsVisible = true, 
-        //     Label = "zero",
-        // };
-        //
-        // number0.AddEvent(AddonEventType.ButtonClick, () => EditNumber(0));
-        //
-        // // Attach custom node to addon
-        // //
-        // // IMPORTANT: Once attached, >> do not detach or dispose these nodes <<
-        // // When attaching the game will take ownership of the nodes and all associated data,
-        // // and will properly clean up when the addon is closed
-        // nativeController.AttachToAddon(number0, this);
-        //
-        // xPos += number0.Width + UnitPadding;
-        //
-        // enter = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "=",
-        // };
-        //
-        // enter.AddEvent(AddonEventType.ButtonClick, () => {
-        //     currentValue = currentOperation switch {
-        //         CurrentOperation.Add => currentValue + lastValue,
-        //         CurrentOperation.Subtract => lastValue - currentValue,
-        //         CurrentOperation.Multiply => currentValue * lastValue,
-        //         CurrentOperation.Divide => lastValue / currentValue,
-        //         _ => currentValue,
-        //     };
-        //
-        //     if (textBox is not null) {
-        //         textBox.Value = currentValue.ToString(CultureInfo.InvariantCulture);
-        //     }
-        //
-        //     currentOperation = CurrentOperation.None;
-        // });
-        // nativeController.AttachToAddon(enter, this);
-        //
-        // xPos += enter.Width + UnitPadding;
-        //
-        // add = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "+",
-        // };
-        //
-        // add.AddEvent(AddonEventType.ButtonClick, () => {
-        //     if (currentOperation is not CurrentOperation.Add) {
-        //         lastValue = currentValue;
-        //         currentValue = 0;
-        //         currentOperation = CurrentOperation.Add;
-        //     }
-        // });
-        // nativeController.AttachToAddon(add, this);
-        //
-        // xPos = FramePadding;
-        // yPos -= VerticalPadding + UnitSize;
-        //
-        // number1 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos), 
-        //     Size = new Vector2(UnitSize, UnitSize), 
-        //     IsVisible = true, 
-        //     Label = "1",
-        // };
-        //
-        // number1.AddEvent(AddonEventType.ButtonClick, () => EditNumber(1));
-        // nativeController.AttachToAddon(number1, this);
-        //
-        // xPos += number1.Width + UnitPadding;
-        //
-        // number2 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "2",
-        // };
-        //
-        // number2.AddEvent(AddonEventType.ButtonClick, () => EditNumber(2));
-        // nativeController.AttachToAddon(number2, this);
-        //
-        // xPos += number2.Width + UnitPadding;
-        //
-        // number3 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "3",
-        // };
-        //
-        // number3.AddEvent(AddonEventType.ButtonClick, () => EditNumber(3));
-        // nativeController.AttachToAddon(number3, this);
-        //
-        // xPos += number3.Width + UnitPadding;
-        //
-        // subtract = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "-",
-        // };
-        //
-        // subtract.AddEvent(AddonEventType.ButtonClick, () => {
-        //     if (currentOperation is not CurrentOperation.Subtract) {
-        //         lastValue = currentValue;
-        //         currentValue = 0;
-        //         currentOperation = CurrentOperation.Subtract;
-        //     }
-        // });
-        // nativeController.AttachToAddon(subtract, this);
-        //
-        // xPos = FramePadding;
-        // yPos -= VerticalPadding + UnitSize;
-        //
-        // number4 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "4",
-        // };
-        //
-        // number4.AddEvent(AddonEventType.ButtonClick, () => EditNumber(4));
-        // nativeController.AttachToAddon(number4, this);
-        //
-        // xPos += number4.Width + UnitPadding;
-        //
-        // number5 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "5",
-        // };
-        //
-        // number5.AddEvent(AddonEventType.ButtonClick, () => EditNumber(5));
-        // nativeController.AttachToAddon(number5, this);
-        //
-        // xPos += number5.Width + UnitPadding;
-        //
-        // number6 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "6",
-        // };
-        //
-        // number6.AddEvent(AddonEventType.ButtonClick, () => EditNumber(6));
-        // nativeController.AttachToAddon(number6, this);
-        //
-        // xPos += number6.Width + UnitPadding;
-        //
-        // multiply = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "X",
-        // };
-        //
-        // multiply.AddEvent(AddonEventType.ButtonClick, () => {
-        //     if (currentOperation is not CurrentOperation.Multiply) {
-        //         lastValue = currentValue;
-        //         currentValue = 0;
-        //         currentOperation = CurrentOperation.Multiply;
-        //     }
-        // });
-        // nativeController.AttachToAddon(multiply, this);
-        //
-        // xPos = FramePadding;
-        // yPos -= VerticalPadding + UnitSize;
-        //
-        // number7 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "7",
-        // };
-        //
-        // number7.AddEvent(AddonEventType.ButtonClick, () => EditNumber(7));
-        // nativeController.AttachToAddon(number7, this);
-        //
-        // xPos += number7.Width + UnitPadding;
-        //
-        // number8 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "8",
-        // };
-        //
-        // number8.AddEvent(AddonEventType.ButtonClick, () => EditNumber(8));
-        // nativeController.AttachToAddon(number8, this);
-        //
-        // xPos += number8.Width + UnitPadding;
-        //
-        // number9 = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "9",
-        // };
-        //
-        // number9.AddEvent(AddonEventType.ButtonClick, () => EditNumber(9));
-        // nativeController.AttachToAddon(number9, this);
-        //
-        // xPos += number9.Width + UnitPadding;
-        //
-        // divide = new TextButtonNode {
-        //     Position = new Vector2(xPos, yPos),
-        //     Size = new Vector2(UnitSize, UnitSize),
-        //     IsVisible = true,
-        //     Label = "/",
-        // };
-        //
-        // divide.AddEvent(AddonEventType.ButtonClick, () => {
-        //     if (currentOperation is not CurrentOperation.Divide) {
-        //         lastValue = currentValue;
-        //         currentValue = 0;
-        //         currentOperation = CurrentOperation.Divide;
-        //     }
-        // });
-        // nativeController.AttachToAddon(divide, this);
-        //
-        // textBox = new TextBox(nativeController) {
-        //     Position = new Vector2(FramePadding, FramePadding + addon->WindowHeaderCollisionNode->Height),
-        //     Size = new Vector2(Size.X - FramePadding * 2.0f, yPos - addon->WindowHeaderCollisionNode->Y - FramePadding - UnitPadding * 2.0f),
-        //     IsVisible = true,
-        //     Value = "0",
-        // };
-        //
-        // nativeController.AttachToAddon(textBox, this);
+        // IMPORTANT: Once attached, >> do not detach or dispose these nodes <<
+        // When attaching the game will take ownership of the nodes and all associated data,
+        // and will properly clean up when the addon is closed
+        nativeController.AttachToAddon(number0, this);
+        
+        xPos += number0.Width + UnitPadding;
+        
+        enter = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "=",
+        };
+        
+        enter.AddEvent(AddonEventType.ButtonClick, () => {
+            currentValue = currentOperation switch {
+                CurrentOperation.Add => currentValue + lastValue,
+                CurrentOperation.Subtract => lastValue - currentValue,
+                CurrentOperation.Multiply => currentValue * lastValue,
+                CurrentOperation.Divide => lastValue / currentValue,
+                _ => currentValue,
+            };
+        
+            if (textBox is not null) {
+                textBox.Value = currentValue.ToString(CultureInfo.InvariantCulture);
+            }
+        
+            currentOperation = CurrentOperation.None;
+        });
+        nativeController.AttachToAddon(enter, this);
+        
+        xPos += enter.Width + UnitPadding;
+        
+        add = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "+",
+        };
+        
+        add.AddEvent(AddonEventType.ButtonClick, () => {
+            if (currentOperation is not CurrentOperation.Add) {
+                lastValue = currentValue;
+                currentValue = 0;
+                currentOperation = CurrentOperation.Add;
+            }
+        });
+        nativeController.AttachToAddon(add, this);
+        
+        xPos = FramePadding;
+        yPos -= VerticalPadding + UnitSize;
+        
+        number1 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos), 
+            Size = new Vector2(UnitSize, UnitSize), 
+            IsVisible = true, 
+            Label = "1",
+        };
+        
+        number1.AddEvent(AddonEventType.ButtonClick, () => EditNumber(1));
+        nativeController.AttachToAddon(number1, this);
+        
+        xPos += number1.Width + UnitPadding;
+        
+        number2 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "2",
+        };
+        
+        number2.AddEvent(AddonEventType.ButtonClick, () => EditNumber(2));
+        nativeController.AttachToAddon(number2, this);
+        
+        xPos += number2.Width + UnitPadding;
+        
+        number3 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "3",
+        };
+        
+        number3.AddEvent(AddonEventType.ButtonClick, () => EditNumber(3));
+        nativeController.AttachToAddon(number3, this);
+        
+        xPos += number3.Width + UnitPadding;
+        
+        subtract = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "-",
+        };
+        
+        subtract.AddEvent(AddonEventType.ButtonClick, () => {
+            if (currentOperation is not CurrentOperation.Subtract) {
+                lastValue = currentValue;
+                currentValue = 0;
+                currentOperation = CurrentOperation.Subtract;
+            }
+        });
+        nativeController.AttachToAddon(subtract, this);
+        
+        xPos = FramePadding;
+        yPos -= VerticalPadding + UnitSize;
+        
+        number4 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "4",
+        };
+        
+        number4.AddEvent(AddonEventType.ButtonClick, () => EditNumber(4));
+        nativeController.AttachToAddon(number4, this);
+        
+        xPos += number4.Width + UnitPadding;
+        
+        number5 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "5",
+        };
+        
+        number5.AddEvent(AddonEventType.ButtonClick, () => EditNumber(5));
+        nativeController.AttachToAddon(number5, this);
+        
+        xPos += number5.Width + UnitPadding;
+        
+        number6 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "6",
+        };
+        
+        number6.AddEvent(AddonEventType.ButtonClick, () => EditNumber(6));
+        nativeController.AttachToAddon(number6, this);
+        
+        xPos += number6.Width + UnitPadding;
+        
+        multiply = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "X",
+        };
+        
+        multiply.AddEvent(AddonEventType.ButtonClick, () => {
+            if (currentOperation is not CurrentOperation.Multiply) {
+                lastValue = currentValue;
+                currentValue = 0;
+                currentOperation = CurrentOperation.Multiply;
+            }
+        });
+        nativeController.AttachToAddon(multiply, this);
+        
+        xPos = FramePadding;
+        yPos -= VerticalPadding + UnitSize;
+        
+        number7 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "7",
+        };
+        
+        number7.AddEvent(AddonEventType.ButtonClick, () => EditNumber(7));
+        nativeController.AttachToAddon(number7, this);
+        
+        xPos += number7.Width + UnitPadding;
+        
+        number8 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "8",
+        };
+        
+        number8.AddEvent(AddonEventType.ButtonClick, () => EditNumber(8));
+        nativeController.AttachToAddon(number8, this);
+        
+        xPos += number8.Width + UnitPadding;
+        
+        number9 = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "9",
+        };
+        
+        number9.AddEvent(AddonEventType.ButtonClick, () => EditNumber(9));
+        nativeController.AttachToAddon(number9, this);
+        
+        xPos += number9.Width + UnitPadding;
+        
+        divide = new TextButtonNode {
+            Position = new Vector2(xPos, yPos),
+            Size = new Vector2(UnitSize, UnitSize),
+            IsVisible = true,
+            Label = "/",
+        };
+        
+        divide.AddEvent(AddonEventType.ButtonClick, () => {
+            if (currentOperation is not CurrentOperation.Divide) {
+                lastValue = currentValue;
+                currentValue = 0;
+                currentOperation = CurrentOperation.Divide;
+            }
+        });
+        nativeController.AttachToAddon(divide, this);
+        
+        textBox = new TextBox(nativeController) {
+            Position = new Vector2(FramePadding, FramePadding + addon->WindowHeaderCollisionNode->Height),
+            Size = new Vector2(Size.X - FramePadding * 2.0f, yPos - addon->WindowHeaderCollisionNode->Y - FramePadding - UnitPadding * 2.0f),
+            IsVisible = true,
+            Value = "0",
+        };
+        
+        nativeController.AttachToAddon(textBox, this);
     }
 
     // OnHide is called when our window is about to close, but hasn't closed yet.
